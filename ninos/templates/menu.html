@@ -1,0 +1,14 @@
+<ul class="nav nav-tabs nav-stacked main-menu">
+	<li class="nav-header hidden-tablet">Cocina</li>
+	<li><a class="ajax-link" href="{% url "list_punto_view" %}"><i class="icon icon-pin"></i> <span class="hidden-tablet">Puntos de venta</span></a></li>
+	<li><a class="ajax-link" href="{% url "list_tipo_view" %}"><i class="icon icon-gear"></i> <span class="hidden-tablet">Tipos</span></a></li>
+	<li><a class="ajax-link" href="{% url "list_producto_view" %}"><i class="icon icon-basket"></i> <span class="hidden-tablet">Productos</span></a></li>
+	<li><a class="ajax-link" href="{% url "list_plato_view" %}"><i class="icon icon-heart"></i> <span class="hidden-tablet">Platos</span></a></li>
+	<li class="nav-header hidden-tablet">Administración</li>
+	<li><a class="ajax-link" href="{% url "list_local_view" %}"><i class="icon icon-home"></i> <span class="hidden-tablet">Locales</span></a></li>
+	<li><a class="ajax-link" href="{% url "list_habitacion_view" %}"><i class="icon icon-key"></i> <span class="hidden-tablet">Habitaciones</span></a></li>
+	<li><a class="ajax-link" href="{% url "list_cliente_view" %}"><i class="icon icon-user"></i> <span class="hidden-tablet">Clientes</span></a></li>
+	<li><a class="ajax-link" href="{% url "list_user_view" %}"><i class="icon icon-users"></i> <span class="hidden-tablet">Usuarios</span></a></li>
+	
+</ul>
+<label id="for-is-ajax" class="hidden-tablet" for="is-ajax"><input id="is-ajax" type="checkbox"> Precargar</label>
