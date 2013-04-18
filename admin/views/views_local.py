@@ -3,6 +3,7 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.auth import login,logout,authenticate
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.http import HttpResponseRedirect, Http404
 from django.core.urlresolvers import reverse
@@ -11,11 +12,13 @@ from admin.models import local
 from admin.forms import addLocalForm
 
 # Locales.
+@login_required(login_url = '/login/')
 def list_local_view(request):
 	locales = local.objects.filter()
 	context = {'locales': locales}
 	return render_to_response('admin/local/list.html', context, context_instance = RequestContext(request))
 
+@login_required(login_url = '/login/')
 def add_local_view(request):
 	if request.method == "POST":
 		form = addLocalForm(request.POST)
@@ -32,6 +35,7 @@ def add_local_view(request):
 
 	return render_to_response('admin/local/add.html', context, context_instance = RequestContext(request))
 
+@login_required(login_url = '/login/')
 def edit_local_view(request, id):
 	try:
 		l = local.objects.get(id = id)
@@ -53,6 +57,7 @@ def edit_local_view(request, id):
 	context = {'form': form, 'local': l}
 	return render_to_response('admin/local/edit.html', context, context_instance = RequestContext(request))
 
+@login_required(login_url = '/login/')
 def delete_local_view(request, id):
 	try:
 		l = local.objects.get(id = id)

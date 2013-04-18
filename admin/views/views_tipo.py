@@ -3,6 +3,7 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.auth import login,logout,authenticate
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.http import HttpResponseRedirect, Http404
 from django.core.urlresolvers import reverse
@@ -11,11 +12,13 @@ from admin.models import tipo
 from admin.forms import addTipoForm
 
 # Tipos.
+@login_required(login_url = '/login/')
 def list_tipo_view(request):
 	tipos = tipo.objects.filter()
 	context = {'tipos': tipos}
 	return render_to_response('admin/tipo/list.html', context, context_instance = RequestContext(request))
 
+@login_required(login_url = '/login/')
 def add_tipo_view(request):
 	if request.method == "POST":
 		form = addTipoForm(request.POST)
@@ -32,6 +35,7 @@ def add_tipo_view(request):
 
 	return render_to_response('admin/tipo/add.html', context, context_instance = RequestContext(request))
 
+@login_required(login_url = '/login/')
 def edit_tipo_view(request, id):
 	try:
 		t = tipo.objects.get(id = id)
@@ -53,6 +57,7 @@ def edit_tipo_view(request, id):
 	context = {'form': form, 'tipo': t}
 	return render_to_response('admin/tipo/edit.html', context, context_instance = RequestContext(request))
 
+@login_required(login_url = '/login/')
 def delete_tipo_view(request, id):
 	try:
 		t = tipo.objects.get(id = id)

@@ -2,8 +2,9 @@
 
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.contrib.auth import login,logout,authenticate
 from django.contrib import messages
+from django.contrib.auth import login,logout,authenticate
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponseRedirect, Http404
 from django.core.urlresolvers import reverse
 
@@ -11,11 +12,13 @@ from admin.models import cliente
 from admin.forms import addClienteForm
 
 # Clientes.
+@login_required(login_url = '/login/')
 def list_cliente_view(request):
 	clientes = cliente.objects.filter().order_by('activo')
 	context = {'clientes': clientes}
 	return render_to_response('admin/cliente/list.html', context, context_instance = RequestContext(request))
 
+@login_required(login_url = '/login/')
 def add_cliente_view(request):
 	if request.method == "POST":
 		form = addClienteForm(request.POST)
@@ -32,6 +35,7 @@ def add_cliente_view(request):
 
 	return render_to_response('admin/cliente/add.html', context, context_instance = RequestContext(request))
 
+@login_required(login_url = '/login/')
 def edit_cliente_view(request, id):
 	try:
 		c = cliente.objects.get(id = id)
@@ -54,6 +58,7 @@ def edit_cliente_view(request, id):
 	context = {'form': form, 'cliente': c}
 	return render_to_response('admin/cliente/edit.html', context, context_instance = RequestContext(request))
 
+@login_required(login_url = '/login/')
 def delete_cliente_view(request, id):
 	try:
 		c = cliente.objects.get(id = id)

@@ -3,6 +3,7 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.auth import login,logout,authenticate
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.http import HttpResponseRedirect, Http404
 from django.core.urlresolvers import reverse
@@ -11,11 +12,13 @@ from admin.models import punto
 from admin.forms import addPuntoForm
 
 # Habitaciones.
+@login_required(login_url = '/login/')
 def list_punto_view(request):
 	puntos = punto.objects.filter()
 	context = {'puntos': puntos}
 	return render_to_response('admin/punto/list.html', context, context_instance = RequestContext(request))
 
+@login_required(login_url = '/login/')
 def add_punto_view(request):
 	if request.method == "POST":
 		form = addPuntoForm(request.POST)
@@ -32,6 +35,7 @@ def add_punto_view(request):
 
 	return render_to_response('admin/punto/add.html', context, context_instance = RequestContext(request))
 
+@login_required(login_url = '/login/')
 def edit_punto_view(request, id):
 	try:
 		p = punto.objects.get(id = id)
@@ -59,6 +63,7 @@ def edit_punto_view(request, id):
 	context = {'form': form, 'punto': p}
 	return render_to_response('admin/punto/edit.html', context, context_instance = RequestContext(request))
 
+@login_required(login_url = '/login/')
 def delete_punto_view(request, id):
 	try:
 		p = punto.objects.get(id = id)

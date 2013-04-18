@@ -2,7 +2,7 @@
 
 from django import forms
 from admin.models import local, habitacion, cliente, tipo, producto, plato, punto
-from django.contrib.auth.models import User, Permission
+from django.contrib.auth.models import User, Permission, Group
 
 # Administración.
 class addLocalForm(forms.ModelForm):
@@ -73,7 +73,19 @@ class UserForm(forms.ModelForm):
 
 # Grupos
 class GroupForm(forms.Form):
-	grupos = forms.ChoiceField()
+	grupos = forms.ModelChoiceField(queryset=Group.objects.all(), required = True)
 
 	def clean(self):
 		return self.cleaned_data
+
+	def __init__(self, *args, **kwargs):
+		my_group = kwargs.pop('grupo', None)
+
+		super(GroupForm, self).__init__(*args, **kwargs)
+		modelchoicefields = [field for field_name, field in self.fields.iteritems() if
+			isinstance(field, forms.ModelChoiceField)]
+
+		for field in modelchoicefields:
+			field.empty_label = None
+			if my_group:
+				field.initial = my_group

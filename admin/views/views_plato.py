@@ -3,6 +3,7 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.auth import login,logout,authenticate
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.http import HttpResponseRedirect, Http404
 from django.core.urlresolvers import reverse
@@ -11,11 +12,13 @@ from admin.models import plato
 from admin.forms import addPlatoForm
 
 # Platos.
+@login_required(login_url = '/login/')
 def list_plato_view(request):
 	platos = plato.objects.filter()
 	context = {'platos': platos}
 	return render_to_response('admin/plato/list.html', context, context_instance = RequestContext(request))
 
+@login_required(login_url = '/login/')
 def add_plato_view(request):
 	if request.method == "POST":
 		form = addPlatoForm(request.POST)
@@ -33,6 +36,7 @@ def add_plato_view(request):
 
 	return render_to_response('admin/plato/add.html', context, context_instance = RequestContext(request))
 
+@login_required(login_url = '/login/')
 def edit_plato_view(request, id):
 	try:
 		p = plato.objects.get(id = id)
@@ -55,6 +59,7 @@ def edit_plato_view(request, id):
 	context = {'form': form, 'plato': p}
 	return render_to_response('admin/plato/edit.html', context, context_instance = RequestContext(request))
 
+@login_required(login_url = '/login/')
 def delete_plato_view(request, id):
 	try:
 		p = plato.objects.get(id = id)

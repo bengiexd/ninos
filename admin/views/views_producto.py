@@ -3,6 +3,7 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.auth import login,logout,authenticate
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.http import HttpResponseRedirect, Http404
 from django.core.urlresolvers import reverse
@@ -11,11 +12,13 @@ from admin.models import producto
 from admin.forms import addProductoForm
 
 # Productos.
+@login_required(login_url = '/login/')
 def list_producto_view(request):
 	productos = producto.objects.filter()
 	context = {'productos': productos}
 	return render_to_response('admin/producto/list.html', context, context_instance = RequestContext(request))
 
+@login_required(login_url = '/login/')
 def add_producto_view(request):
 	if request.method == "POST":
 		form = addProductoForm(request.POST)
@@ -32,6 +35,7 @@ def add_producto_view(request):
 
 	return render_to_response('admin/producto/add.html', context, context_instance = RequestContext(request))
 
+@login_required(login_url = '/login/')
 def edit_producto_view(request, id):
 	try:
 		p = producto.objects.get(id = id)
@@ -53,6 +57,7 @@ def edit_producto_view(request, id):
 	context = {'form': form, 'producto': p}
 	return render_to_response('admin/producto/edit.html', context, context_instance = RequestContext(request))
 
+@login_required(login_url = '/login/')
 def delete_producto_view(request, id):
 	try:
 		p = producto.objects.get(id = id)

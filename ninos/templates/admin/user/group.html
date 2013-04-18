@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %} Permisos {% endblock %}
 {% block content %}
-<form class="form-horizontal" name="" method="POST" action="{% url "edit_user_view" user.id %}">
+<form class="form-horizontal" name="" method="POST" action="{% url "perm_user_view" user.id %}">
 	<div class="row-fluid">
 		<div class="box span9">
 			<div class="box-header well" data-original-title>
@@ -28,6 +28,7 @@
 			</div>
 		</div>
 	</div>
+	<input type="hidden" name="user_id" value="{{ user.id }}" />
 	{% csrf_token %}
 </form>
 {% endblock %}
