@@ -16,7 +16,7 @@ DATABASES = {
         'NAME': 'ninos',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': 'root',
         'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '',                      # Set to empty string for default.
     }
@@ -34,7 +34,7 @@ TIME_ZONE = 'America/Lima'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-en'
+LANGUAGE_CODE = 'es-es'
 
 SITE_ID = 1
 
@@ -133,6 +133,7 @@ INSTALLED_APPS = (
     'debug_toolbar',
     # Custom apps.
     'admin',
+    'pedidos'
 )
 
 # A sample logging configuration. The only tangible logging
