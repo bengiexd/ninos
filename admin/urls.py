@@ -53,4 +53,7 @@ urlpatterns = patterns('admin.views',
 	url(r'^user/add$',					'add_user_view',		name = 'add_user_view'),
 	url(r'^user/edit/(?P<id>.*)/$',		'edit_user_view',		name = 'edit_user_view'),
 	url(r'^user/perm/(?P<id>.*)/$',		'perm_user_view',		name = 'perm_user_view'),
+	
+	#Stock productos
+	url(r'^stock-producto/$',			'list_stock_producto_view',		name = 'list_stock_producto_view'),
 )

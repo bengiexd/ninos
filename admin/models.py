@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from decimal import *
 
 # Lugares.
@@ -59,3 +60,14 @@ class plato(models.Model):
 	
 	def __unicode__(self):
 		return self.nombre
+
+#Pedidos Stock
+class stock_producto(models.Model):
+	hecho_por = models.ForeignKey(User)
+	punto_origen = models.IntegerField()
+	punto_destino = models.ForeignKey('admin.punto')
+	producto  = models.ForeignKey('admin.producto')
+	cantidad = models.IntegerField()
+	detalle = models.CharField(max_length = 255)
+	fecha = models.DateTimeField()
+	
