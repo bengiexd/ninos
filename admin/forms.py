@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django import forms
-from admin.models import local, habitacion, cliente, tipo, producto, plato, punto
+from admin.models import local, habitacion, cliente, tipo, producto, plato, punto, stock_producto
 from django.contrib.auth.models import User, Permission, Group
 
 # Administración.
@@ -12,6 +12,35 @@ class addLocalForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super(addLocalForm, self).__init__(*args, **kwargs)
 		self.fields['nombre'].widget.attrs['class'] = "input-xlarge"
+
+class addStockProductosForm(forms.ModelForm):
+	class Meta:
+		model = stock_producto
+
+	def __init__(self, *args, **kwargs):
+		super(addStockProductosForm, self).__init__(*args, **kwargs)
+		self.fields['detalle'].widget.attrs['class'] = "input-xlarge"
+		
+class consumoStockProductosForm(forms.Form):
+	oid = forms.IntegerField()
+	pid  = forms.IntegerField()
+	cantidad = forms.IntegerField()
+	detalle = forms.CharField(max_length = 255)
+	
+	def __init__(self, *args, **kwargs):
+		super(consumoStockProductosForm, self).__init__(*args, **kwargs)
+		self.fields['detalle'].widget.attrs['class'] = "input-xlarge"	
+	
+class pedidoStockProductosForm(forms.ModelForm):
+	oid = forms.IntegerField()
+	pid  = forms.IntegerField()
+
+	class Meta:
+		model = stock_producto
+		
+	def __init__(self, *args, **kwargs):
+		super(pedidoStockProductosForm, self).__init__(*args, **kwargs)
+		self.fields['detalle'].widget.attrs['class'] = "input-xlarge"	
 
 class addHabitacionForm(forms.ModelForm):
 	class Meta:
