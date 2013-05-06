@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %} Añadir Stock (productos) {% endblock %}
+{% block content %}
+<form class="form-horizontal" name="" method="POST" action="{% url "add_stock_producto_view" %}">
+	<div class="row-fluid">
+		<div class="box span9">
+			<div class="box-header well" data-original-title>
+				<h2><i class="icon-pencil"></i> Añadir Stock (productos)</h2>
+			</div>
+			<div class="box-content">
+				<div class="control-group">
+					<label class="control-label" for="id_punto_destino">Punto:</label>
+					<div class="controls">
+						{{ form.punto_destino }}
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="id_producto">Producto:</label>
+					<div class="controls">
+						{{ form.producto }}
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="id_cantidad">Cantidad:</label>
+					<div class="controls">
+						{{ form.cantidad }}
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="id_detalle">Detalle:</label>
+					<div class="controls">
+						{{ form.detalle }}
+					</div>
+				</div>				
+			</div>
+		</div>
+		<div class="box span3">
+			<div class="box-header well" data-original-title>
+				<h2><i class="icon-wrench"></i> Acciones</h2>
+			</div>
+			<div class="box-content">
+				<p class="center">
+					<button class="btn btn-primary" type="submit">Guardar</button>
+					<a href="{% url "list_stock_producto_view" %}" class="btn">Volver a la lista</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	{% csrf_token %}
+</form>
+{% endblock %}

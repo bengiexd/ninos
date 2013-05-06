@@ -22,11 +22,11 @@
 						<td>{{ stk.producto }}</td>
 						<td>{{ stk.saldo }}</td>
 						<td style="width: 180px;" class="center">
-							<a class="btn btn-info" href="{% url "edit_local_view" stk.producto_id %}">
+							<a class="btn btn-info" href="{% url "pedido_stock_producto_view" stk.punto_destino_id stk.producto_id %}">
 								<i class="icon-edit icon-white"></i>  
 								Pedido
 							</a>
-							<a class="btn btn-danger btn-setting" href="{% url "edit_local_view" stk.producto_id %}">
+							<a class="btn btn-danger" href="{% url "consumo_stock_producto_view" stk.punto_destino_id stk.producto_id %}">
 								<i class="icon-edit icon-white"></i>  
 								Consumo
 							</a>							
@@ -46,7 +46,7 @@
 		</div>
 		<div class="box-content">
 			<p class="center">
-				<a href="{% url "add_local_view" %}" class="btn btn-primary">Añadir stock (productos)</a>
+				<a href="{% url "add_stock_producto_view" %}" class="btn btn-primary">Añadir stock (productos)</a>
 			</p>
 		</div>
 	</div>

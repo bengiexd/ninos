@@ -58,6 +58,9 @@ urlpatterns = patterns('admin.views',
 	
 	# Stock productos.
 	url(r'^stock-producto/$',			'list_stock_producto_view',		name = 'list_stock_producto_view'),
+	url(r'^stock-producto/add$',		'add_stock_producto_view',		name = 'add_stock_producto_view'),
+	url(r'^stock-producto/consumo/(?P<oid>.*)/(?P<pid>.*)/$',	'consumo_stock_producto_view',		name = 'consumo_stock_producto_view'),
+	url(r'^stock-producto/pedido/(?P<oid>.*)/(?P<pid>.*)/$',	'pedido_stock_producto_view',		name = 'pedido_stock_producto_view'),
 
 	# Pedidos.
 	url(r'^pedido/$',					'list_pedido_view',		name = 'list_pedido_view'),
@@ -65,4 +68,5 @@ urlpatterns = patterns('admin.views',
 	url(r'^pedido/edit/(?P<id>.*)/$',	'edit_pedido_view',		name = 'edit_pedido_view'),
 	url(r'^pedido/delete/(?P<id>.*)/$',	'delete_pedido_view',	name = 'delete_pedido_view'),
 	url(r'^pedido/json/(?P<id>.*)/$',	'json_pedido_detalles_view',	name = 'json_pedido_detalles_view'),
+
 )
