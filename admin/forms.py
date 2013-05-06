@@ -4,6 +4,8 @@ from django import forms
 from admin.models import local, habitacion, cliente, tipo, producto, plato, punto
 from django.contrib.auth.models import User, Permission, Group
 
+from admin.widgets import NumberInput
+
 # Administración.
 class addLocalForm(forms.ModelForm):
 	class Meta:
@@ -73,7 +75,7 @@ class UserForm(forms.ModelForm):
 
 # Grupos
 class GroupForm(forms.Form):
-	grupos = forms.ModelChoiceField(queryset=Group.objects.all(), required = True)
+	grupos = forms.ModelChoiceField(queryset = Group.objects.all(), required = True)
 
 	def clean(self):
 		return self.cleaned_data
@@ -89,3 +91,22 @@ class GroupForm(forms.Form):
 			field.empty_label = None
 			if my_group:
 				field.initial = my_group
+
+# Pedidos
+class PedidoForm(forms.Form):
+	clientes = forms.ModelChoiceField(queryset = cliente.objects.filter(activo = True), required = True)
+	platos = forms.ModelChoiceField(queryset = plato.objects.all())
+	cantidad = forms.CharField(widget = NumberInput(attrs={'min': 1}))
+	notas = forms.CharField(required = False, widget = forms.Textarea(attrs={'class':'autogrow', 'cols': 45, 'rows': 4}))
+
+	def __init__(self, *args, **kwargs):
+		super(PedidoForm, self).__init__(*args, **kwargs)
+		self.fields['clientes'].widget.attrs['data-rel'] = "chosen"
+		self.fields['clientes'].widget.attrs['data-placeholder'] = "Escoje un cliente"
+
+		self.fields['platos'].widget.attrs['data-rel'] = "chosen"
+		self.fields['platos'].widget.attrs['data-placeholder'] = "Escoje un plato"
+
+		self.fields['cantidad'].widget.attrs['class'] = "cantidad-plato"
+		self.fields['cantidad'].widget.attrs['placeholder'] = "Cantidad"
+		self.fields['cantidad'].widget.attrs['value'] = "1"

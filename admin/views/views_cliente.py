@@ -5,8 +5,9 @@ from django.template import RequestContext
 from django.contrib import messages
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.core.urlresolvers import reverse
+from django.core import serializers
 
 from admin.models import cliente
 from admin.forms import addClienteForm
@@ -68,3 +69,9 @@ def delete_cliente_view(request, id):
 	c.delete()
 	messages.success(request, 'Se borró el cliente.')
 	return HttpResponseRedirect(reverse('list_cliente_view'))
+
+@login_required(login_url = '/login/')
+def json_cliente_view(request):
+	clientes = cliente.objects.filter(activo = True)
+	data = serializers.serialize("json", clientes)
+	return HttpResponse(data, mimetype = 'application/json')

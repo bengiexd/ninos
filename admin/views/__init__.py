@@ -8,3 +8,4 @@ from views_producto import *
 from views_plato import *
 from views_user import *
 from views_stock_producto import *
+from views_pedido import *

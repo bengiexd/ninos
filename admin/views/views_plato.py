@@ -5,8 +5,9 @@ from django.template import RequestContext
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.core.urlresolvers import reverse
+from django.core import serializers
 
 from admin.models import plato
 from admin.forms import addPlatoForm
@@ -69,3 +70,10 @@ def delete_plato_view(request, id):
 	p.delete()
 	messages.success(request, 'Se borró el plato.')
 	return HttpResponseRedirect(reverse('list_plato_view'))
+
+
+@login_required(login_url = '/login/')
+def json_plato_view(request):
+	platos = plato.objects.filter()
+	data = serializers.serialize("json", platos)
+	return HttpResponse(data, mimetype = 'application/json')

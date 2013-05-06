@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<title>Iniciar sesión</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	{% block css %}
 	<!-- The styles -->
 	<link id="bs-css" href="/media/css/bootstrap-cerulean.css" rel="stylesheet">
 	<style type="text/css">
@@ -30,7 +31,7 @@
 	<link href='/media/css/jquery.iphone.toggle.css' rel='stylesheet'>
 	<link href='/media/css/opa-icons.css' rel='stylesheet'>
 	<link href='/media/css/uploadify.css' rel='stylesheet'>
-
+	{% endblock %}
 	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>
 	  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -96,7 +97,7 @@
 				</div><!--/fluid-row-->
 		
 	</div><!--/.fluid-container-->
-
+	{% block javascript %}
 	<!-- external javascript
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
@@ -171,6 +172,7 @@
 	<!-- application script for Charisma demo -->
 	<script src="/media/js/charisma.js"></script>
 	
+	{% endblock %}
 		
 </body>
 </html>

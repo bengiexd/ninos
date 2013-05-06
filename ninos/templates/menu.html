@@ -1,4 +1,7 @@
 <ul class="nav nav-tabs nav-stacked main-menu">
+	<li class="nav-header hidden-tablet">Pedidos</li>
+	<li><a class="ajax-link" href="{% url "add_pedido_view" %}"><i class="icon icon-edit"></i> <span class="hidden-tablet">Añadir un pedido</span></a></li>
+	<li><a class="ajax-link" href="{% url "list_pedido_view" %}"><i class="icon icon-edit"></i> <span class="hidden-tablet">Lista de pedidos</span></a></li>
 	<li class="nav-header hidden-tablet">Stock</li>
 	<li><a class="ajax-link" href="{% url "list_stock_producto_view" %}"><i class="icon icon-pin"></i> <span class="hidden-tablet">Stock productos</span></a></li>
 	<li class="nav-header hidden-tablet">Cocina</li>

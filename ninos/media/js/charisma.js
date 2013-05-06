@@ -287,6 +287,8 @@ function docReady(){
 		else 					   $('i',$(this)).removeClass('icon-chevron-down').addClass('icon-chevron-up');
 		$target.slideToggle();
 	});
+
+	// Delete item.
 	$('.btn-setting').click(function(e){
 		e.preventDefault();
 		var dataId = $(this).data('id');

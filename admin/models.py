@@ -71,3 +71,21 @@ class stock_producto(models.Model):
 	detalle = models.CharField(max_length = 255)
 	fecha = models.DateTimeField()
 	
+# Pedidos
+class pedido(models.Model):
+	ESTADOS = (
+		('R', 'Recibido'),
+		('A', 'Atendido'),
+		('I', 'Impreso'),
+		('P', 'Pagado'),
+	)
+	hecho_por = models.ForeignKey(User)
+	para = models.ForeignKey(cliente)
+	cuando = models.DateTimeField()
+	estado = models.CharField(max_length = 1, choices = ESTADOS, default = 'R')
+	notas = models.TextField()
+
+class pedido_detalle(models.Model):
+	pertenece_al_pedido = models.ForeignKey(pedido)
+	plato = models.ForeignKey(plato)
+	cantidad = models.IntegerField()
