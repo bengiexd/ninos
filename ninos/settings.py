@@ -15,9 +15,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'ninos',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
-        'USER': 'ninos',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '',                      # Set to empty string for default.
     }
 }
@@ -127,8 +127,10 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
+    # Raven.
+    'raven.contrib.django.raven_compat',
     # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    'django.contrib.admindocs',
     'django_evolution',
     'debug_toolbar',
     # Custom apps.
@@ -171,3 +173,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 #Debug
 INTERNAL_IPS = ('127.0.0.1',)
+
+# Configura tu valor DSN
+RAVEN_CONFIG = {
+    'dsn': 'https://fef59db9788842c891c3c0380aaa3206:4f8d09619d944ae8a7590608b83f10b7@app.getsentry.com/8161',
+}
