@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %} Permisos {% endblock %}
+{% block content %}
+<form class="form-horizontal" name="" method="POST" action="{% url "perm_user_view" user.id %}">
+	<div class="row-fluid">
+		<div class="box span9">
+			<div class="box-header well" data-original-title>
+				<h2><i class="icon-pencil"></i> Permisos del usuario '{{ user }}' </h2>
+			</div>
+			<div class="box-content">
+				<div class="control-group">
+					<label class="control-label" for="id_grupos">Grupo:</label>
+					<div class="controls">
+						{{ form.grupos }}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="box span3">
+			<div class="box-header well" data-original-title>
+				<h2><i class="icon-wrench"></i> Acciones</h2>
+			</div>
+			<div class="box-content">
+				<p class="center">
+					<button class="btn btn-primary" type="submit">Guardar</button>
+					<a href="{% url "list_user_view" %}" class="btn">Volver a la lista</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	<input type="hidden" name="user_id" value="{{ user.id }}" />
+	{% csrf_token %}
+</form>
+{% endblock %}

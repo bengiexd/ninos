@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block title %} Editar pedido {% endblock %}
+{% block content %}
+<h2>Mozo actual: {{ user.username }}</h2>
+<form class="form-horizontal" id="frm-add-pedido" name="" method="POST" action="{% url "add_pedido_view" %}">
+	<div class="row-fluid">
+		<div class="box span7">
+			<div class="box-header well" data-original-title>
+				<h2><i class="icon-pencil"></i> Editar pedido</h2>
+			</div>
+			<div class="box-content">
+				<div class="control-group">
+					<label class="control-label" for="id_clientes">Cliente:</label>
+					<div class="controls">
+						<span class="input-xlarge uneditable-input">{{ pedido.para }}</span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="id_clientes">Hospedado en:</label>
+					<div class="controls">
+						<span class="input-xlarge uneditable-input">{{ pedido.para.hospedado_en }}</span>
+					</div>
+				</div>
+			</div>
+			<div class="control-group" id="section-pedido">
+				<label class="control-label" for="platos">Plato:</label>
+				<div class="controls">
+					{{ form.cantidad }}
+					{{ form.platos }}					
+					<button class="btn btn-small" type="button" id="add"><i class="icon-plus-sign"></i> Agregar</button>
+				</div>
+			</div>
+			<div class="box-content">
+				<div class="control-group">
+					<label class="control-label" for="id_notas">Notas:</label>
+					<div class="controls">
+						{{ form.notas }}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="box span5">
+			<div class="box-header well" data-original-title>
+				<h2><i class="icon-list"></i> Detalles del pedido</h2>
+			</div>
+			<div class="box-content">
+				<table id="pedido-lista" class="table table-condensed">
+					<thead>
+						<tr>
+							<th>Cantidad</th>
+							<th>Nombre</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</div>
+		</div>
+		<div class="box span5">
+			<div class="box-header well" data-original-title>
+				<h2><i class="icon-wrench"></i> Acciones</h2>
+			</div>
+			<div class="box-content">
+				<p class="center">
+					<button class="btn btn-primary" id="submit" type="submit">Guardar</button>
+					<a href="{% url "list_pedido_view" %}" class="btn">Volver a la lista</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	{% csrf_token %}
+</form>
+{# Mustache template #}
+<div id="pedido-template" style="visibility:hidden;">
+	<table>
+		<tbody>
+			<tr data-plato-id="{% templatetag openvariable %}id{% templatetag closevariable %}">
+				<td>{% templatetag openvariable %}cantidad{% templatetag closevariable %}</td>
+				<td>{% templatetag openvariable %}nombre{% templatetag closevariable %}</td>
+				<td><button class="btn btn-mini btn-danger delete" type="button"><i class="icon icon-white icon-close"></i> Quitar</button></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+{# End Mustache template #}
+{% endblock %}
+{% block javascript %}
+{{ block.super }}
+<script type="text/javascript">
+	var django_json_url = '{% url "json_pedido_detalles_view" pedido.id %}';
+	var django_url = '{% url "edit_pedido_view" pedido.id %}'
+</script>
+<script type="text/javascript" src="/media/js/underscore-min.js"></script>
+<script type="text/javascript" src="/media/js/mustache.js"></script>
+<script type="text/javascript" src="/media/js/backbone-min.js"></script>
+<script type="text/javascript" src="/media/custom/pedido-edit.js"></script>
+{% endblock %}
+{% block css %}
+{{ block.super }}
+<link href="/media/css/charisma-extras.css" rel="stylesheet">
+{% endblock %}
