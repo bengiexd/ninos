@@ -22,9 +22,10 @@ def list_plato_view(request):
 @login_required(login_url = '/login/')
 def add_plato_view(request):
 	if request.method == "POST":
-		form = addPlatoForm(request.POST)
+		form = addPlatoForm(request.POST, request.FILES)
 		if form.is_valid():
 			add = form.save(commit = False)
+			#handle_uploaded_file(request.FILES['foto'])
 			add.save()
 			form.save_m2m()
 			messages.success(request, 'Se creó el plato.')
@@ -45,7 +46,7 @@ def edit_plato_view(request, id):
 		raise Http404
 
 	if request.method == "POST":
-		form = addPlatoForm(request.POST, instance = p)
+		form = addPlatoForm(request.POST, request.FILES, instance = p)
 		if form.is_valid():
 			edit = form.save(commit = False)
 			form.save_m2m()

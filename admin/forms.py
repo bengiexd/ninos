@@ -93,6 +93,7 @@ class addPlatoForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super(addPlatoForm, self).__init__(*args, **kwargs)
 		self.fields['nombre'].widget.attrs['class'] = "input-xlarge"
+		self.fields['foto'].widget.attrs['class'] = "input-file uniform_on"
 
 # Usuarios
 class UserForm(forms.ModelForm):

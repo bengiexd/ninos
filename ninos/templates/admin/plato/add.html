@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %} Añadir plato {% endblock %}
 {% block content %}
-<form class="form-horizontal" name="" method="POST" action="{% url "add_plato_view" %}">
+<form class="form-horizontal" name="" method="POST" action="{% url "add_plato_view" %}" enctype="multipart/form-data">
 	<div class="row-fluid">
 		<div class="box span9">
 			<div class="box-header well" data-original-title>
@@ -32,6 +32,12 @@
 					<label class="control-label" for="id_de_venta_en">De venta en:</label>
 					<div class="controls">
 						{{ form.de_venta_en }}
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="id_foto">Foto:</label>
+					<div class="controls">
+						{{ form.foto }}
 					</div>
 				</div>
 			</div>
